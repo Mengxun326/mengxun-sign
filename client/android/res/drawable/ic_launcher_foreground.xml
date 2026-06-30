@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Moon crescent -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillAlpha="0.95"
+        android:pathData="M54,24 C70,24 82,36 82,54 C82,72 70,84 54,84 C44,84 37,80 33,73 C40,70 46,63 46,54 C46,45 40,38 33,35 C37,28 44,24 54,24z"/>
+    <!-- Small star -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M68,32 L70,36 L74,37 L70,38 L68,42 L66,38 L62,37 L66,36z"/>
+    <!-- Small star 2 -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M76,44 L77,46 L79,47 L77,48 L76,50 L75,48 L73,47 L75,46z"/>
+    <!-- Checkmark in moon -->
+    <path
+        android:fillColor="#6C63FF"
+        android:pathData="M48,52 L52,56 L58,48"
+        android:strokeColor="#6C63FF"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:fillAlpha="0"/>
+</vector>

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <!-- DO NOT EDIT THIS: This file is populated automatically by the deployment tool. -->
+
+    <array name="bundled_libs">
+    </array>
+
+    <array name="qt_libs">
+        <item>arm64-v8a;c++_shared</item>
+        <item>arm64-v8a;Qt6Core_arm64-v8a</item>
+        <item>arm64-v8a;Qt6Gui_arm64-v8a</item>
+        <item>arm64-v8a;Qt6Concurrent_arm64-v8a</item>
+        <item>arm64-v8a;Qt6Network_arm64-v8a</item>
+        <item>arm64-v8a;Qt6Multimedia_arm64-v8a</item>
+        <item>arm64-v8a;Qt6Widgets_arm64-v8a</item>
+        <item>arm64-v8a;avutil</item>
+        <item>arm64-v8a;swresample</item>
+        <item>arm64-v8a;avcodec</item>
+        <item>arm64-v8a;Qt6FFmpegStub-crypto_arm64-v8a</item>
+        <item>arm64-v8a;Qt6FFmpegStub-ssl_arm64-v8a</item>
+        <item>arm64-v8a;avformat</item>
+        <item>arm64-v8a;swscale</item>
+        <item>arm64-v8a;Qt6MultimediaWidgets_arm64-v8a</item>
+        <item>arm64-v8a;Qt6Positioning_arm64-v8a</item>
+        <item>arm64-v8a;Qt6Svg_arm64-v8a</item>
+    </array>
+
+    <array name="load_local_libs">
+        <item>arm64-v8a;libplugins_multimedia_ffmpegmediaplugin_arm64-v8a.so:libplugins_multimedia_androidmediaplugin_arm64-v8a.so:libplugins_platforms_qtforandroid_arm64-v8a.so:libplugins_position_qtposition_android_arm64-v8a.so</item>
+    </array>
+
+    <string name="use_local_qt_libs">1</string>
+    <string name="bundle_local_qt_libs">1</string>
+    <string name="system_libs_prefix"></string>
+</resources>

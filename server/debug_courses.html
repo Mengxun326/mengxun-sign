@@ -1,0 +1,1548 @@
+﻿﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<script>
+    _HOST_ = "//mooc1-2.chaoxing.com";
+    _CP_ = "/mooc-ans";
+    _HOST_CP1_ = "//mooc1-2.chaoxing.com/mooc-ans";
+    // _HOST_CP2_ = _HOST_ + _CP_;
+    _HOST_CP2_ = _CP_;
+</script><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>学生端</title>
+<link href="//mooc1-2.chaoxing.com/mooc-ans/css/courseShowStyle.css?v=2020-0603-1145" type="text/css" rel="stylesheet"/>
+<link href="//mooc1-2.chaoxing.com/mooc-ans/css/courseMove.css?v=2018-0518-1928" type="text/css" rel="stylesheet"/>
+<style>
+.Mrtjc3 {border-radius: 5px;color: #fff;height: 10px;line-height: 10px;position: absolute;text-align: center;width: 100%;}
+#top {position:absolute;width:26px;height:26px;background:url(http://mooc1-2.chaoxing.com/img/min_top_22.png) no-repeat;bottom:63px;border-bottom:1px #fff solid;}
+.experience{display:inline-block;padding:0 10px;height:28px;border:1px solid #e1e7f0;background: #F6F9FE;text-align:center;line-height:28px;font-size:14px;color:#5C7499;border-radius: 30px;margin-left: 20px;position: absolute;right: 367px;top: 37px;}
+.experience:hover{opacity:0.7}
+</style>
+<script type="text/javascript" src="//mooc1-2.chaoxing.com/mooc-ans/js/set/wayer_v1.2.mini.js"></script>
+<script src="//mooc1-2.chaoxing.com/mooc-ans/js/jquery-1.9.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="//mooc1-2.chaoxing.com/mooc-ans/js/courseTip.js?v=2022-0929-1648"></script>
+<script type="text/javascript" src="//mooc-res2.chaoxing.com/mooc-ans/js/common/jquery.min.js"></script>
+<script type="text/javascript" src="//mooc-res2.chaoxing.com/mooc-ans/js/common/jquery-migrate.min.js"></script><script src="//mooc1-2.chaoxing.com/mooc-ans/js/ServerHost.js"></script>
+<script type="text/javascript" src="//mooc1-2.chaoxing.com/mooc-ans/static/js/domain.js"></script>
+<script src="//mooc1-2.chaoxing.com/mooc-ans/js/jquery-often-effects.js" type="text/javascript"></script>
+<script src="//mooc1-2.chaoxing.com/mooc-ans/js/image.js"></script>
+<script src="//mooc1-2.chaoxing.com/mooc-ans/js/totop.js"></script>
+<script>
+var quitcoursemsg1="退课后，你将删除自己在本课的学习记录和成绩。确认退出课程？";
+var quitthecourse="退课";
+$(function(){
+	$('#zla_title').tab({
+		contentId:'',
+		contentCss:'.zmodel',
+		titleOff:'zla_m_item',
+		titleOn:'zla_m_item zla_m_cur'
+	});
+		$('#zla_title2').tab({
+		contentId:'',
+		contentCss:'.zmodel2',
+		titleOff:'zla_m_item2',
+		titleOn:'zla_m_item2 zla_m_cur2'
+	});
+    
+});
+
+</script>
+</head>
+
+<body>
+	<div class="Wrapbody">
+		<input type="hidden" id="debug" name="debug" value="">
+		<p id="to_top" style="z-index:1000;position: fixed;_position: absolute;_top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0)));right: 100px;bottom:0px;">
+						        	<a target="_self" id="top" href="javascript:;" title="返回顶部" style="position:absolute;width:72px;height:36px;line-height:36px;font-size:16px;bottom:96px;border:1px solid #7b9e31;color:#0a0a0a;background:#fff url(http://mooc1-2.chaoxing.com/images/top.png) no-repeat 9px center;padding-left:42px;border-radius:3px;right:-83px;"  onclick="$('html,body').animate({scrollTop:0},600);">返回顶部</a>
+		</p>
+		    
+			<ul class="zla_m_tab" id="zla_title">
+				                  <li class="zla_m_item zla_m_cur"><a href="javascript:void(0)" onclick="getMyStudyCourse(0);">我学的课</a></li>
+								                	<a href="javascript:void(0)" onclick="toNewFyCourseList()" class="experience">体验新版</a>
+				            </ul>
+			<div class="Addkb" id="loading"><img src="//mooc1-2.chaoxing.com/mooc-ans/image/loading.gif"></img></div>
+	        <div class="zmodel" style=" display:block;">
+				<script type="text/javascript" src="//mooc1-2.chaoxing.com/mooc-ans/js/set/wayer_v1.2.mini.js"></script>
+
+	
+<div class="Addkc" data="false">
+  </div>
+<div class="courseSearch">
+	<input type="text" placeholder="搜索" class="searchInput" id="searchValueInput" name="courseName">
+	<input id="searchDelBtn" type="button" class="searchDelBtn" value=""/>
+	<input id="findBtn" type="button" class="fr searchBtn" value="">
+</div>
+<style type="text/css">
+.cheatrecord{font-size:14px;position: absolute;right:140px;top:34px;width:77px;height:40px;line-height:40px;}
+.cheatrecord a{font-size:14px;color:#0099ff}
+.cheatrecord a span{display:inline-block;width:16px;height:16px;background:url(//mooc1-2.chaoxing.com/mooc-ans/images/cheat_new.png) no-repeat;float:left;margin-top:12px;margin-right:2px;}
+.ulDiv ul li {height: 280px; }
+.faceLayer{display:none;}
+.maskLayer{width:100%;height:100%;background:#fff;opacity:0.3;position:fixed;top:0;left:0;z-index:1002;}
+.faceContainer{width:100%;height:100%;position:fixed;top:0;left:0;z-index:1003;}
+.faceDiv{width:500px;margin:0 auto;background:#000;padding-top:30px;margin-top:10%;position:relative;}
+.faceCancle{position:absolute;top:5px;right:5px;cursor:pointer;display:block;width:20px;height:20px;color:#fff;font-size:16px;text-align:center;ling-height:20px;}
+.gInfo{position:relative;width: 850px;height: 42px;margin-bottom: 15px;margin-top: -10px;}
+.gInfo a{text-decoration: none;color:#333;}
+.gInfo p{line-height: 42px;text-indent:12px;font-size: 13px;background: #fff5eb;	}
+.gInfo span{position: absolute;right:10px;top:15px;width:12px;height: 12px;background: url(//mooc1-2.chaoxing.com/mooc-ans/img/gclose.png) no-repeat center;background-size:cover;}
+</style>
+<input type="hidden" id="schoolid" value="330863" />
+<input type="hidden" id="userId" value="208223265" />
+ <div class="ulDiv" style=" margin-top:10px;  overflow: hidden;font-family: Microsoft YaHei;">
+  
+<input type="hidden" id="moveClassId" value="" />
+<input type="hidden" id="faceCourseId" value="" />
+<input type="hidden" id="faceClassId" value="" />
+<ul class="clearfix">
+			
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="264996768" />
+		<input type="hidden" name="classId" value="149661212" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=264996768&clazzid=149661212&vc=1&cpi=460704444'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/669ca80d6a0c5f74835bb936a41aabca.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/669ca80d6a0c5f74835bb936a41aabca.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=264996768&clazzid=149661212&vc=1&cpi=460704444' target="_blank" title="登陆测试">登陆测试</a>
+			<i> </i>
+			</h3>
+										<p title="周春天">周春天  </p>
+				<p title="">  </p>
+				<p title="默认班级">默认班级</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="248882908" />
+		<input type="hidden" name="classId" value="146914338" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=248882908&clazzid=146914338&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/4e1ec95274c35ea254e0adf472e7a007.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/4e1ec95274c35ea254e0adf472e7a007.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=248882908&clazzid=146914338&vc=1&cpi=347404320' target="_blank" title="人工智能(专业)">人工智能(专业)</a>
+			<i> </i>
+			</h3>
+										<p title="刘唤唤、朱小东、金颖勤、郭冬梅、吴坤、郑苹">刘唤唤、朱小东、金颖勤、郭冬梅、吴...  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1/2（金颖勤）">信息安全23-1/2（金颖勤）</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="202345649" />
+		<input type="hidden" name="classId" value="146603793" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=202345649&clazzid=146603793&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/53c5e276a310a822ad8b29db.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/53c5e276a310a822ad8b29db.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=202345649&clazzid=146603793&vc=1&cpi=347404320' target="_blank" title="Android程序设计">Android程序设计</a>
+			<i> </i>
+			</h3>
+										<p title="赵宝">赵宝  </p>
+				<p title="Android程序设计">Android程序设计  </p>
+				<p title="信息安全23-1/2">信息安全23-1/2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="247280654" />
+		<input type="hidden" name="classId" value="146032972" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=247280654&clazzid=146032972&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/6ce77a10dd3268daa7ba6c93e5e76459.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/6ce77a10dd3268daa7ba6c93e5e76459.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=247280654&clazzid=146032972&vc=1&cpi=347404320' target="_blank" title="Go语言">Go语言</a>
+			<i> </i>
+			</h3>
+										<p title="张柱">张柱  </p>
+				<p title="安徽理工大学">安徽理工大学  </p>
+				<p title="信息安全23-1">信息安全23-1</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="260729907" />
+		<input type="hidden" name="classId" value="139816273" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=260729907&clazzid=139816273&vc=1&cpi=460704444'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/b0ce8db24d1f45efef69e2cb9336d208.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/b0ce8db24d1f45efef69e2cb9336d208.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=260729907&clazzid=139816273&vc=1&cpi=460704444' target="_blank" title="大学计算机基础（第十三期）">大学计算机基础（第十...</a>
+			<i> </i>
+			</h3>
+										<p title="杨勇">杨勇  </p>
+				<p title="第13次开课&nbsp;&nbsp;&nbsp;开课时间：2026-03-01~2026-07-18">第13次开课&nbsp;&nbsp;&nbsp;开课时间：2026-03-01~2026-07-18  </p>
+				<p title="2026年4C安徽省级赛">2026年4C安徽省级赛</p>
+					    		   <p class="">课程时间：2026年03月01日-2026年07月18日</p>
+									<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="204034691" />
+		<input type="hidden" name="classId" value="140058289" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=204034691&clazzid=140058289&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/69740d27d2b5d22c13d1c4353d509430.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/69740d27d2b5d22c13d1c4353d509430.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=204034691&clazzid=140058289&vc=1&cpi=347404320' target="_blank" title="信息隐藏">信息隐藏</a>
+			<i> </i>
+			</h3>
+										<p title="殷晓波">殷晓波  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1/2">信息安全23-1/2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="233273419" />
+		<input type="hidden" name="classId" value="139650958" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=233273419&clazzid=139650958&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/669ca80d6a0c5f74835bb936a41aabca.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/669ca80d6a0c5f74835bb936a41aabca.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=233273419&clazzid=139650958&vc=1&cpi=347404320' target="_blank" title="Linux系统管理与开发(2026)">Linux系统管理与开发(2...</a>
+			<i> </i>
+			</h3>
+										<p title="周强">周强  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1">信息安全23-1</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="260499134" />
+		<input type="hidden" name="classId" value="139589263" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=260499134&clazzid=139589263&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/9febc74bd31ed98ed06bd2adb7b25e8f.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/9febc74bd31ed98ed06bd2adb7b25e8f.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=260499134&clazzid=139589263&vc=1&cpi=347404320' target="_blank" title="软件工程（双语）">软件工程（双语）</a>
+			<i> </i>
+			</h3>
+										<p title="方贤进、李洁、陈科彭、夏晨星、朱君、潘丰">方贤进、李洁、陈科彭、夏晨星、朱君...  </p>
+				<p title="软件工程是一门运用工程科学的理论、方法和技术,研究和指导软件开发和演化的交叉学科。其教学目的在于培养学生使用工程化的方法高效地开发高质量软件的能力,以及进行项目管理的能力。本书根据“‘101计划’下本科计算机专业核心课程教材建设”的指导思想编写。&nbsp;在结构体系上,采用模块化结构和案例驱动结构相结合的方式,将软件工程的内容按软件生命周期的进程划分为不同的模块,每个模块负责讲解一个相对独立的知识点,再通过案例的走向作为接口,在模块之间进行衔接,形成一个完整的知识体系。">软件工程是一门运用工程科学的理论、方法和技术,研究和指导软件开发和演化的交...  </p>
+				<p title="信息安全23-1/2潘丰">信息安全23-1/2潘丰</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="219639476" />
+		<input type="hidden" name="classId" value="136803558" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=219639476&clazzid=136803558&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/7619c2f71df7ad2ef60440d2214c3d4e.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/7619c2f71df7ad2ef60440d2214c3d4e.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=219639476&clazzid=136803558&vc=1&cpi=347404320' target="_blank" title="网络攻防实训">网络攻防实训</a>
+			<i> </i>
+			</h3>
+										<p title="赵宝">赵宝  </p>
+				<p title="网络攻防实训">网络攻防实训  </p>
+				<p title="23信息安全">23信息安全</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="258176912" />
+		<input type="hidden" name="classId" value="134369680" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=258176912&clazzid=134369680&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/669ca80d6a0c5f74835bb936a41aabca.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/669ca80d6a0c5f74835bb936a41aabca.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=258176912&clazzid=134369680&vc=1&cpi=347404320' target="_blank" title="网络空间安全-招募">网络空间安全-招募</a>
+			<i> </i>
+			</h3>
+										<p title="李邵莹">李邵莹  </p>
+				<p title="">  </p>
+				<p title="能力测试">能力测试</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="244522096" />
+		<input type="hidden" name="classId" value="133094230" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=244522096&clazzid=133094230&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/134f6c42c583d0750f99d03792af4488.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/134f6c42c583d0750f99d03792af4488.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=244522096&clazzid=133094230&vc=1&cpi=347404320' target="_blank" title="现代密码学">现代密码学</a>
+			<i> </i>
+			</h3>
+										<p title="方贤进">方贤进  </p>
+				<p title="信息安全、区块链专业核心课">信息安全、区块链专业核心课  </p>
+				<p title="信息安全23-1/2班">信息安全23-1/2班</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="256343894" />
+		<input type="hidden" name="classId" value="130207304" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=256343894&clazzid=130207304&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/3a7c4e2929905646967168696f78ff01.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/3a7c4e2929905646967168696f78ff01.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=256343894&clazzid=130207304&vc=1&cpi=347404320' target="_blank" title="形势与政策2025秋">形势与政策2025秋</a>
+			<i> </i>
+			</h3>
+										<p title="朱朝君">朱朝君  </p>
+				<p title="">  </p>
+				<p title="23-信息安全1/2物联网2">23-信息安全1/2物联网2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="202089405" />
+		<input type="hidden" name="classId" value="129920822" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=202089405&clazzid=129920822&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/44112d42b8a86488aa4af0d72e88dfda.jpeg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/44112d42b8a86488aa4af0d72e88dfda.jpeg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=202089405&clazzid=129920822&vc=1&cpi=347404320' target="_blank" title="信息论与编码">信息论与编码</a>
+			<i> </i>
+			</h3>
+										<p title="殷晓波">殷晓波  </p>
+				<p title="">  </p>
+				<p title="信安23-1/2">信安23-1/2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="255767227" />
+		<input type="hidden" name="classId" value="128869679" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=255767227&clazzid=128869679&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/a884a738a03a5fe203d1ac2eb45fbd82.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/a884a738a03a5fe203d1ac2eb45fbd82.jpg' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=255767227&clazzid=128869679&vc=1&cpi=347404320' target="_blank" title="汉语揭秘">汉语揭秘</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="255767519" />
+		<input type="hidden" name="classId" value="128869972" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=255767519&clazzid=128869972&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/0b54afe13a8ddc26b808e5fa53b3c92b.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/0b54afe13a8ddc26b808e5fa53b3c92b.png' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=255767519&clazzid=128869972&vc=1&cpi=347404320' target="_blank" title="地球历史及其生命的奥秘">地球历史及其生命的奥秘</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="239411331" />
+		<input type="hidden" name="classId" value="126751433" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=239411331&clazzid=126751433&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/7619c2f71df7ad2ef60440d2214c3d4e.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/7619c2f71df7ad2ef60440d2214c3d4e.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=239411331&clazzid=126751433&vc=1&cpi=347404320' target="_blank" title="计算机网络（团队课程）">计算机网络（团队课程）</a>
+			<i> </i>
+			</h3>
+										<p title="葛斌">葛斌  </p>
+				<p title="安徽理工大学计算机学院">安徽理工大学计算机学院  </p>
+				<p title="23级信息安全1-2">23级信息安全1-2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="205452626" />
+		<input type="hidden" name="classId" value="126213160" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=205452626&clazzid=126213160&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/3a7c4e2929905646967168696f78ff01.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/3a7c4e2929905646967168696f78ff01.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=205452626&clazzid=126213160&vc=1&cpi=347404320' target="_blank" title="操作系统及课程设计">操作系统及课程设计</a>
+			<i> </i>
+			</h3>
+										<p title="张柱">张柱  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1">信息安全23-1</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="227840528" />
+		<input type="hidden" name="classId" value="125697681" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=227840528&clazzid=125697681&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/1488ed90d207798110a23ca70d010eb9.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/1488ed90d207798110a23ca70d010eb9.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=227840528&clazzid=125697681&vc=1&cpi=347404320' target="_blank" title="网络攻防技术">网络攻防技术</a>
+			<i> </i>
+			</h3>
+										<p title="赵宝">赵宝  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1,2">信息安全23-1,2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="227231566" />
+		<input type="hidden" name="classId" value="125511893" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=227231566&clazzid=125511893&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/a83f7a04a1ebec7b608e52bdb96b4f5b.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/a83f7a04a1ebec7b608e52bdb96b4f5b.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=227231566&clazzid=125511893&vc=1&cpi=347404320' target="_blank" title="编译原理">编译原理</a>
+			<i> </i>
+			</h3>
+										<p title="王艳">王艳  </p>
+				<p title="">  </p>
+				<p title="信安23-1-2">信安23-1-2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="214869147" />
+		<input type="hidden" name="classId" value="121208786" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=214869147&clazzid=121208786&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/3a7c4e2929905646967168696f78ff01.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/3a7c4e2929905646967168696f78ff01.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=214869147&clazzid=121208786&vc=1&cpi=347404320' target="_blank" title="Python程序设计">Python程序设计</a>
+			<i> </i>
+			</h3>
+										<p title="张柱">张柱  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1">信息安全23-1</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="249820875" />
+		<input type="hidden" name="classId" value="114359645" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=249820875&clazzid=114359645&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/b0ce8db24d1f45efef69e2cb9336d208.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/b0ce8db24d1f45efef69e2cb9336d208.jpg' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=249820875&clazzid=114359645&vc=1&cpi=347404320' target="_blank" title="大学计算机基础（第十一期）">大学计算机基础（第十...</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="251326172" />
+		<input type="hidden" name="classId" value="118443220" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=251326172&clazzid=118443220&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/db744cdc8071b54f66626d4b5c1b6630.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/db744cdc8071b54f66626d4b5c1b6630.jpg' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=251326172&clazzid=118443220&vc=1&cpi=347404320' target="_blank" title="创新创业">创新创业</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="251326434" />
+		<input type="hidden" name="classId" value="118444036" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=251326434&clazzid=118444036&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/a28be43dbf29daee846e0fcd6ffa6bfd.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/a28be43dbf29daee846e0fcd6ffa6bfd.png' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=251326434&clazzid=118444036&vc=1&cpi=347404320' target="_blank" title="科学通史">科学通史</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="205243645" />
+		<input type="hidden" name="classId" value="115241830" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=205243645&clazzid=115241830&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/f2e26d5cd076f44ca574839584a5544b.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/f2e26d5cd076f44ca574839584a5544b.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=205243645&clazzid=115241830&vc=1&cpi=347404320' target="_blank" title="算法设计与分析">算法设计与分析</a>
+			<i> </i>
+			</h3>
+										<p title="朱晓娟，石文兵，朱小东，张明伟，郝伟，王艳，刘唤唤">朱晓娟，石文兵，朱小东，张明伟，郝...  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1/2(朱晓娟）">信息安全23-1/2(朱晓娟）</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="249891992" />
+		<input type="hidden" name="classId" value="114555700" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=249891992&clazzid=114555700&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/3a7c4e2929905646967168696f78ff01.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/3a7c4e2929905646967168696f78ff01.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=249891992&clazzid=114555700&vc=1&cpi=347404320' target="_blank" title="习思想2025年春">习思想2025年春</a>
+			<i> </i>
+			</h3>
+										<p title="朱朝君">朱朝君  </p>
+				<p title="">  </p>
+				<p title="2023-信息安全12">2023-信息安全12</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="222502104" />
+		<input type="hidden" name="classId" value="114767772" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=222502104&clazzid=114767772&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/9c3a28a5cf83557aa3b998192e54e1b1.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/9c3a28a5cf83557aa3b998192e54e1b1.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=222502104&clazzid=114767772&vc=1&cpi=347404320' target="_blank" title="数据库系统概论">数据库系统概论</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="205249358" />
+		<input type="hidden" name="classId" value="114704917" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=205249358&clazzid=114704917&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/53c66593a310a822ad8b315c.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/53c66593a310a822ad8b315c.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=205249358&clazzid=114704917&vc=1&cpi=347404320' target="_blank" title="汇编语言程序设计">汇编语言程序设计</a>
+			<i> </i>
+			</h3>
+										<p title="宗欣欣">宗欣欣  </p>
+				<p title="">  </p>
+				<p title="信安23">信安23</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="246794203" />
+		<input type="hidden" name="classId" value="110962617" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=246794203&clazzid=110962617&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/6ce77a10dd3268daa7ba6c93e5e76459.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/6ce77a10dd3268daa7ba6c93e5e76459.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=246794203&clazzid=110962617&vc=1&cpi=347404320' target="_blank" title="安理工蓝桥杯竞赛">安理工蓝桥杯竞赛</a>
+			<i> </i>
+			</h3>
+										<p title="卢可">卢可  </p>
+				<p title="安徽理工大学">安徽理工大学  </p>
+				<p title="第十六届蓝桥杯-自费参赛">第十六届蓝桥杯-自费参赛</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="239405504" />
+		<input type="hidden" name="classId" value="109783935" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=239405504&clazzid=109783935&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/669ca80d6a0c5f74835bb936a41aabca.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/669ca80d6a0c5f74835bb936a41aabca.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=239405504&clazzid=109783935&vc=1&cpi=347404320' target="_blank" title="数字逻辑实验">数字逻辑实验</a>
+			<i> </i>
+			</h3>
+										<p title="郭">郭  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1，2">信息安全23-1，2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="238467576" />
+		<input type="hidden" name="classId" value="108485495" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=238467576&clazzid=108485495&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/669ca80d6a0c5f74835bb936a41aabca.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/669ca80d6a0c5f74835bb936a41aabca.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=238467576&clazzid=108485495&vc=1&cpi=347404320' target="_blank" title="数字逻辑">数字逻辑</a>
+			<i> </i>
+			</h3>
+										<p title="郭">郭  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1,2数字媒体23-2">信息安全23-1,2数字媒体23-2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="246748234" />
+		<input type="hidden" name="classId" value="107330422" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=246748234&clazzid=107330422&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/6ce77a10dd3268daa7ba6c93e5e76459.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/6ce77a10dd3268daa7ba6c93e5e76459.jpg' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=246748234&clazzid=107330422&vc=1&cpi=347404320' target="_blank" title="智能精准开采概论">智能精准开采概论</a>
+			<i> </i>
+			</h3>
+										<p title="阚吉亮">阚吉亮  </p>
+				<p title="安徽理工大学">安徽理工大学  </p>
+				<p title="信息安全23-1">信息安全23-1</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="246432858" />
+		<input type="hidden" name="classId" value="106601716" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=246432858&clazzid=106601716&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/c52ca84bf94b3aca4e1b63a1960a2186.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/c52ca84bf94b3aca4e1b63a1960a2186.png' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=246432858&clazzid=106601716&vc=1&cpi=347404320' target="_blank" title="当代大学生国家安全教育">当代大学生国家安全教育</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="245846142" />
+		<input type="hidden" name="classId" value="105201324" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=245846142&clazzid=105201324&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/a597b7c95a3e72dbbdb21f17011ce85f.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/a597b7c95a3e72dbbdb21f17011ce85f.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=245846142&clazzid=105201324&vc=1&cpi=347404320' target="_blank" title="认识实习">认识实习</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="202141451" />
+		<input type="hidden" name="classId" value="103944889" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=202141451&clazzid=103944889&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/53cf3deda310abc6bf2334b5.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/53cf3deda310abc6bf2334b5.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=202141451&clazzid=103944889&vc=1&cpi=347404320' target="_blank" title="认识实习">认识实习</a>
+			<i> </i>
+			</h3>
+										<p title="朱君">朱君  </p>
+				<p title="">  </p>
+				<p title="23级信安1/2">23级信安1/2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="231010389" />
+		<input type="hidden" name="classId" value="103963980" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=231010389&clazzid=103963980&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/8f3d6d1e7b9d26d34ae28a8e3b253265.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/8f3d6d1e7b9d26d34ae28a8e3b253265.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=231010389&clazzid=103963980&vc=1&cpi=347404320' target="_blank" title="认识实习">认识实习</a>
+			<i> </i>
+			</h3>
+										<p title="王艳">王艳  </p>
+				<p title="">  </p>
+				<p title="信安23-1/2">信安23-1/2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="230993030" />
+		<input type="hidden" name="classId" value="102393302" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=230993030&clazzid=102393302&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/40763e39e0b8bcfcaead27260292dec4.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/40763e39e0b8bcfcaead27260292dec4.png' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=230993030&clazzid=102393302&vc=1&cpi=347404320' target="_blank" title="数据结构">数据结构</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="236814360" />
+		<input type="hidden" name="classId" value="101878533" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=236814360&clazzid=101878533&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/9a9d4cb59d1dcd3912fbe3a62e4fcade.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/9a9d4cb59d1dcd3912fbe3a62e4fcade.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=236814360&clazzid=101878533&vc=1&cpi=347404320' target="_blank" title="软件安全【智慧课程】">软件安全【智慧课程】</a>
+			<i> </i>
+			</h3>
+										<p title="彭国军">彭国军  </p>
+				<p title="2021级网安试验班&nbsp;《软件安全》课程">2021级网安试验班&nbsp;《软件安全》课程  </p>
+				<p title="内蒙古暑期培训班">内蒙古暑期培训班</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="242016633" />
+		<input type="hidden" name="classId" value="99363641" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=242016633&clazzid=99363641&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/3a7c4e2929905646967168696f78ff01.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/3a7c4e2929905646967168696f78ff01.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=242016633&clazzid=99363641&vc=1&cpi=347404320' target="_blank" title="形势与政策2024春">形势与政策2024春</a>
+			<i> </i>
+			</h3>
+										<p title="朱朝君">朱朝君  </p>
+				<p title="">  </p>
+				<p title="23级-物联网2，信息安全12">23级-物联网2，信息安全12</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="241765474" />
+		<input type="hidden" name="classId" value="95001032" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=241765474&clazzid=95001032&vc=1&cpi=347404320'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/2942991237b3811e3a2708c472db517c.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/2942991237b3811e3a2708c472db517c.jpg' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=241765474&clazzid=95001032&vc=1&cpi=347404320' target="_blank" title="劳动通论">劳动通论</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="240819608" />
+		<input type="hidden" name="classId" value="92268736" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=240819608&clazzid=92268736&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/200f24ed8823db4c95d950bbff812151.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/200f24ed8823db4c95d950bbff812151.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=240819608&clazzid=92268736&vc=1&cpi=336597602' target="_blank" title="马克思主义基本原理2024春">马克思主义基本原理2024春</a>
+			<i> </i>
+			</h3>
+										<p title="李后梅">李后梅  </p>
+				<p title="开课时间2024-2-26至2024-5-25">开课时间2024-2-26至2024-5-25  </p>
+				<p title="信息安全23-12">信息安全23-12</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="240971183" />
+		<input type="hidden" name="classId" value="92712724" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=240971183&clazzid=92712724&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/f8074ec93de9952f84f54a14fd33f77f.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/f8074ec93de9952f84f54a14fd33f77f.png' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=240971183&clazzid=92712724&vc=1&cpi=336597602' target="_blank" title="JAVA程序设计-232402">JAVA程序设计-232402</a>
+			<i> </i>
+			</h3>
+										<p title="张玉">张玉  </p>
+				<p title="">  </p>
+				<p title="默认班级">默认班级</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="241172296" />
+		<input type="hidden" name="classId" value="93298628" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=241172296&clazzid=93298628&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/3a7c4e2929905646967168696f78ff01.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/3a7c4e2929905646967168696f78ff01.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=241172296&clazzid=93298628&vc=1&cpi=336597602' target="_blank" title="数字媒体23-1,2,信息安全23-1纲要课">数字媒体23-1,2,信息安...</a>
+			<i> </i>
+			</h3>
+										<p title="杨帆">杨帆  </p>
+				<p title="">  </p>
+				<p title="默认班级">默认班级</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="240232427" />
+		<input type="hidden" name="classId" value="90729097" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=240232427&clazzid=90729097&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/669ca80d6a0c5f74835bb936a41aabca.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/669ca80d6a0c5f74835bb936a41aabca.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=240232427&clazzid=90729097&vc=1&cpi=336597602' target="_blank" title="高级语言程序设计综合实训">高级语言程序设计综合实训</a>
+			<i> </i>
+			</h3>
+										<p title="蒋社想">蒋社想  </p>
+				<p title="">  </p>
+				<p title="信息安全23-1/2">信息安全23-1/2</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="221220670" />
+		<input type="hidden" name="classId" value="87374786" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=221220670&clazzid=87374786&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/f23a4b313e1aa0a7a840ab81aabc918f.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/f23a4b313e1aa0a7a840ab81aabc918f.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=221220670&clazzid=87374786&vc=1&cpi=336597602' target="_blank" title="信息安全导论">信息安全导论</a>
+			<i> </i>
+			</h3>
+										<p title="朱晓娟">朱晓娟  </p>
+				<p title="">  </p>
+				<p title="信息安全23级">信息安全23级</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="220177473" />
+		<input type="hidden" name="classId" value="87231866" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=220177473&clazzid=87231866&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/54f2afbda14bf0ecdaaf5888f6c1ec20.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/54f2afbda14bf0ecdaaf5888f6c1ec20.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=220177473&clazzid=87231866&vc=1&cpi=336597602' target="_blank" title="校网络攻防赛">校网络攻防赛</a>
+			<i> </i>
+			</h3>
+										<p title="赵宝">赵宝  </p>
+				<p title="">  </p>
+				<p title="2023年安徽理工大学第九届网络攻防大赛">2023年安徽理工大学第九届网络攻防大赛</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="238491085" />
+		<input type="hidden" name="classId" value="86196000" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=238491085&clazzid=86196000&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/669ca80d6a0c5f74835bb936a41aabca.jpg    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/669ca80d6a0c5f74835bb936a41aabca.jpg' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=238491085&clazzid=86196000&vc=1&cpi=336597602' target="_blank" title="2023年全国大学生网络安全竞赛安徽省赛（网络攻防赛道）赛题讲解培训">2023年全国大学生网络...</a>
+			<i> </i>
+			</h3>
+										<p title="张俊峰、企业工程师">张俊峰、企业工程师  </p>
+				<p title="">  </p>
+				<p title="2023年全国大学生网络安全竞赛安徽省赛（网络攻防赛道）赛题讲解培训">2023年全国大学生网络安全竞赛安徽省...</p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="214512737" />
+		<input type="hidden" name="classId" value="80512577" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=214512737&clazzid=80512577&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/12d221fb2795e8e66d4702ce7d510e05.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/12d221fb2795e8e66d4702ce7d510e05.png' width="270" height="169" />
+								</a>
+			            <a href="javascript:;" class="Gd" title="退课">
+				退课			</a>
+						<a href="javascript:void(0)" class="move"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=214512737&clazzid=80512577&vc=1&cpi=336597602' target="_blank" title="高级语言程序设计(C语言程序设计）">高级语言程序设计(C语...</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+ 	<li style="position:relative;" class="courseItem curFile">
+		<input type="hidden" name="courseId" value="235887524" />
+		<input type="hidden" name="classId" value="79664784" />
+
+		<div class="Mcon1img httpsClass" >
+			<a     href='/visit/stucoursemiddle?courseid=235887524&clazzid=79664784&vc=1&cpi=336597602'  target="_blank"   >
+				<img src= https://p.ananas.chaoxing.com/star3/270_160c/75ae1de2e679bcfabc798741f1b8ecaa.png    onerror="nofind(event)" imagedata='https://p.ananas.chaoxing.com/star3/270_160/75ae1de2e679bcfabc798741f1b8ecaa.png' width="270" height="169" />
+								</a>
+						<a href="javascript:void(0)" class="move"  style="right: 0px;"  title="移动到">
+				移动到			</a>
+		</div>		
+		<div class="Mconright httpsClass">
+			 			<h3 class="clearfix" >
+				<a class="courseName"  href='/visit/stucoursemiddle?courseid=235887524&clazzid=79664784&vc=1&cpi=336597602' target="_blank" title="大学生安全教育（2023级）">大学生安全教育（2023级）</a>
+			<i> </i>
+			</h3>
+										<p style="color:#0099ff">已开启结课模式 </p>
+				<p style="color:#0099ff">学习将不再统计成绩  </p>
+					    						<p class="Mconrightp3" style="display:none;">		
+			</p>		
+		</div>		
+	</li>
+  </ul>
+	 <div class="noSearch">暂无搜索结果</div>
+ </div>
+
+<div class="clearfix teacherArchive"  >
+	<a class="fr" id="archive" href="/mooc-ans/visit/archivecourse/student" 	 style="width: 110px;text-decoration: none;margin-right: 42px;background: #0099ff;height: 28px;line-height: 28px;text-align: center;color: #fff;font-size: 14px;border-radius: 3px;"  >
+		<b class="" style="width:20px; height:20px; background:url(//mooc1-2.chaoxing.com/mooc-ans/images/filecourse/filed.gif) no-repeat;"></b>
+		已结束的课程	</a>
+	<a class="fr" href="/mooc-ans/visit/getdropclazzlist?backUrlType=1"  style="width: 110px;text-decoration: none;margin-right: 42px;background: #0099ff;height: 28px;line-height: 28px;text-align: center;color: #fff;font-size: 14px;border-radius: 3px;" >
+		<b class="" style="width:20px; height:20px; background:url(//mooc1-2.chaoxing.com/mooc-ans/images/filecourse/filed.gif) no-repeat;"></b>
+		已退课课程
+	</a>
+</div>
+<style>
+.tkLayer{position:absolute;left:0;top:35%;width:100%;z-index:99999;}
+.clearfix{zoom:1;}
+.clearfix:after{display:block;content:"";height:0;clear:both;overflow: hidden;}
+.delTk{background:#fff;width:578px;margin:0 auto;border:1px solid #ccc;position:relative;}
+.tkTitle{height:49px;line-height:49px;font-size:16px;font-family:"微软雅黑";padding:0 15px;background:#f0f0f0;border-bottom:1px solid #e0e0e0;}
+.tkCon{font-size:16px;line-height:36px;text-align:center;font-family:"微软雅黑";padding:28px 5px;}
+.selBtn{height:36px;margin-bottom:24px;text-align:center;}
+.confirmBtn,.cancleBtn{display:inline-block;width:96px;font-size:14px;line-height:36px;height:36px;text-align:center;border-radius:3px;}
+.confirmBtn{background:#7b9e31;color:#fff;margin:0 10px;}
+.confirmBtn:hover{background:#8cb833;}
+.cancleBtn{background:#e6e6e6;color:#666;margin:0 10px}
+.cancleBtn:hover{background:#ebebeb;color:#808080;}
+.tkClosed{display:block;width:13px;height:13px;background:url(//mooc1-2.chaoxing.com/mooc-ans/space/new/moocIndex/images/closePng.png) no-repeat left center;position:absolute;top:16px;right:15px;}
+</style>
+<!--弹框-->
+<div id="dropTip" class="tkLayer" style="display:none">
+		<div class="delTk clearfix">
+			<h3 class="tkTitle">移除学生<a class="tkClosed" href="javascript:void(0);" onclick="WAY.box.hide();"></a></h3>
+			<p class="tkCon">移除学生后，可在操作日志中恢复学生及其学习记录？</p>
+			<div class="selBtn">
+				<a href="javascript:void(0);" class="confirmBtn">确定</a>
+				<a href="javascript:void(0);" class="cancleBtn">取消</a>
+			</div>
+		</div>
+</div>
+<!--弹框 结束--><style>
+.collectionBox{width:578px}
+.zlo_content1{padding:0 22px 22px 22px}
+.collectionTop{height:55px;line-height:55px;border-bottom:solid 1px #e6e6e6;font-size:14px;padding:0 8px}
+.newFolder{background:url(//mooc1-2.chaoxing.com/mooc-ans/images/newFolder.png) no-repeat left center;padding-left:30px}
+.colorBlue{color:#0099ff}
+.collectionList{height:360px;overflow:auto}
+.collectionList ul li{padding:15px 8px;height:32px;line-height:32px;border-bottom:solid 1px #e6e6e6;font-size:14px;cursor:pointer}
+.folder{width:38px;height:32px;background:url(//mooc1-2.chaoxing.com/mooc-ans/images/folder_new.png) no-repeat;margin-right:10px}
+.nameInp{width:230px;height:24px;line-height:24px;border:solid 1px #63c0ff;border-radius:3px;box-shadow:0 0 5px #63c0ff;padding:0 4px}
+.nameCancel{width:22px;height:22px;border:none;cursor:pointer;background:url(//mooc1-2.chaoxing.com/mooc-ans/images/icons_new.png) no-repeat left -48px;margin:0 3px}
+.nameBtn{width:22px;height:22px;border:none;cursor:pointer;background:url(//mooc1-2.chaoxing.com/mooc-ans/images/icons_new.png) no-repeat -28px -48px;margin:0 3px}
+.mask{position:fixed;width:100%;height:100%;left:0;top:0;background:rgba(0,0,0,.5);z-index:11}
+.zlooo{border:solid 1px #ccc;background:#fff;min-height:178px;position:fixed;top:10%;left:50%;margin-left:-250px;z-index:12}
+.popupTitle{height:43px;border-bottom:solid 1px #d6ebff;background:#f5faff;line-height:43px;padding:0 15px;font-size:16px;}
+.popupClosed{color:#666;width:20px;text-align:center;cursor:pointer}
+.btnDiv{margin-top:15px;}
+.btnDiv a{display:inline-block;width:90px;height:36px;line-height:36px;border-radius:3px;text-align:center;margin:0 11px;font-size:14px}
+.confirmMove{background:#0099ff;color:#fff}
+.confirmMove:hover{background:#33adff}
+.cancleBtn{background:#e6e6e6}
+.fl{float:left;}
+.fr{float:right;}
+</style>
+<div class="zlooo" id="fileDialog" style="display:none;width: 578px;top: 40%">
+		<input type="hidden" id="delFileId" value=""/>
+		<h3 class="popupTitle"><span onclick="WAY.box.hide();" class="fr popupClosed">X</span>移动到</h2>
+		<div class="zlo_content1">
+			<div class="collectionTop">
+        	<a href="javascript:void(0);" class="newFolder fr createFilex">新建文件夹</a>
+       	    </div>
+			
+			<div class="collectionList clearfix">
+				<ul>
+				<li id="0" class="dir">
+					 <input type="hidden" name="fileId" value="0"/>
+					<span class="folder fl"></span>
+					根目录				</li>
+								</ul>
+		    </div>
+			<div class="btnDiv">
+				<a href="javascript:;" class="confirmMove">确定</a>
+				<a  href="javascript:;" class="cancleBtn">取消</a>
+			</div> 
+			<div class="delLayer">
+				<p>删除文件夹，文件夹内的课程会放入根目录下，确定删除吗？</p>
+				<div class="delBtnDiv">
+					<a href="javascript:;" class="confirmMove" onclick="delFile()">确定</a>
+					<a href="javascript:;" onclick="javascript:$('.delLayer').css('display','none');" class="cancleBtn">取消</a>
+				</div>
+			</div> 				
+		</div>
+</div>
+<script type="text/javascript">
+
+  $(".createFilex").click(function(){
+	var tip = "输入文件夹名称(限16个字)";
+	var newItem="<li><span class=\"folder fl\"></span><div class=\"editFileName\"><input type=\"text\" placeholder=\""+tip+"\" class=\"nameInp\"><input type=\"button\" class=\"nameCancel\"><input type=\"button\" class=\"nameBtn\"></div></li>";
+	$(".collectionList ul ").children().last().after(newItem);
+}); 
+</script><div id="outdelLayer" style="display:none">
+<div class="delLayer"  style="display:block;top:0px;left:-149px">
+	<input type="hidden" id="outDelFileID" value=""/>
+	<p>删除文件夹，文件夹内的课程会放入根目录下，确定删除吗？</p>
+	<div class="delBtnDiv">
+		<a href="javascript:;" class="confirmMove" onclick="outDelFile()">确定</a>
+		<a href="javascript:;" onclick="WAY.box.hide()" class="cancleBtn">取消</a>
+	</div>
+</div>
+</div>
+<div id="js-face" class="face" style="display:none">
+    <div class="zlo_md" style="width:478px;">
+    	<h2 class="zlo_title"><span class="zlo_close" onclick="javascript:WAY.box.hide();"></span><span class="zlo_h">提示</span></h2>
+    	<div class="zlo_content">
+    		<p>该课程需进行“人脸识别”后才可以进行学习，点击“确定”进入人脸识别，请确保已开启了摄像头。</p>
+    		<div class="faceBtn">
+    			<a href="javascript:;" class="face-confirmBtn">确定</a>
+    			<a href="javascript:;" class="face-cancleBtn" onclick="javascript:WAY.box.hide();">取消</a>
+    		</div>				
+    	</div>
+    </div>
+</div>
+
+<div class="faceLayer" id="faceLayer">	
+	<div class="maskLayer"></div>
+	<div class="faceContainer">
+    	<div class="faceDiv">
+			<span class="faceCancle">X</span>
+            <iframe id="faceIframe"frameborder="0" width="500" height="390" src=""></iframe>
+    	</div>
+	</div>
+</div>
+<script src="//mooc1-2.chaoxing.com/mooc-ans/js/jquery.nicescroll.min.js"></script>
+<script>
+function alertTips(){
+	alert("访问高峰时段，此功能暂时关闭");
+}
+$(function(){
+	$(".faceCancle").click(function(){
+		$("#faceLayer").css("display","none");
+	})
+})
+if(document.domain.indexOf('chaoxing.com')>=0){
+	var domain = "https://"+window.location.hostname;
+	$('.httpsClass').each(function(){
+		var href = $(this).find("a").eq(0).attr("href");
+		if(undefined!=href){
+			if(href.startsWith("//")){
+				$(this).find("a").eq(0).attr("href","https:" + href);
+			}else{
+				$(this).find("a").eq(0).attr("href",domain+href);
+			}
+		}	 
+	});
+}
+$(function(){
+   var classIds=[];
+	var liList=$(".ulDiv li");
+	var length=liList.length;
+	liList.each(function(index,me){
+	var classid= $(me).find('input[name="classId"]').val();
+	 if(index!=length-1){
+	     classIds.push(classid);
+		 }
+	});
+	var isReadyMode = "";
+	if(isReadyMode != "1"){
+		jQuery.ajax({ 
+	    	type: "post", 
+	    	url : _HOST_CP2_ + "/api/workTestPendingNew", 
+	    	data: {
+	        	  classIds:classIds.join(",")
+	    		}, 
+	    	success: function(data){
+				var jsonArray= jQuery.parseJSON(data);
+				showRedTip(jsonArray);
+			}
+	    }); 
+	}
+
+function showRedTip(jsonArray){
+    	liList.each(function(index,me){
+		  if(index!=length-1){
+		    var json=jsonArray[index];
+			if(json.hasWorkMsg || json.hasExamMsg|| json.hasCourseDataMsg){
+    	     $(me).find("h3 i").css("display","block");
+			 }
+		 }
+      });
+	}
+	
+});
+$('.closeInfor').click(function(){		
+	jQuery.ajax({ 
+        type: "post", 
+        url : _HOST_CP2_ + "/visit/courses/updateInforMation", 
+        data: {
+            inforMation : 1
+        }, 
+       	success:function(data) {
+       	$('.gInfo').css("display","none");
+        } 
+    }); 
+
+});
+
+$('.inforMation').click(function(){
+	var url =location.origin+_CP_ + "/visit/courses/lookTips?isAjax=true";
+	var zmodel1=$(".zmodel");
+	jQuery.ajax({ 
+        url:url,
+	    data:'',    
+	    type:'get', 
+       	success:function(data) {
+      	$(zmodel1[study]).html(data);
+        } 
+    }); 
+});
+$("#searchValueInput").on('keydown', function (e) {
+	if (e.keyCode == "13") {
+		$("#findBtn").click();
+	}
+});
+$("#findBtn").click(function(){
+	var sw = $(".searchInput").val();
+	if (sw == "") {
+		$(".noSearch").hide();
+		$("#searchDelBtn").hide();
+		$(".folder").show();
+		$(".curFile").show();
+		$(".addLi").show();
+		return;
+	}
+	$("#searchDelBtn").show();
+	var len = $(".courseItem").length;
+	$(".ulDiv>ul li").hide();
+	var count = 0;
+	for (var i = 0; i < len; i++) {
+		var item = $(".courseItem").eq(i);
+		var courseName = item.find(".courseName").attr("title");
+		if (courseName.indexOf(sw) > -1) {
+			item.show();
+			count++;
+		}
+	}
+	if (count == 0) {
+		$(".noSearch").show();
+	} else {
+		$(".noSearch").hide();
+	}
+})
+$("#searchDelBtn").click(function() {
+	$(".searchInput").val("");
+	$(this).hide();
+	$(".noSearch").hide();
+	$(".folder").show();
+	$(".curFile").show();
+	$(".addLi").show();
+})
+$("#searchValueInput").bind("input propertychange", function(){
+	if($(this).val() == "") {
+		$("#searchDelBtn").hide();
+	} else {
+		$("#searchDelBtn").show();
+	}
+});
+</script>            </div>
+            <div class="zmodel">
+            
+            </div> 
+	</div>
+
+<script src="//mooc1-2.chaoxing.com/mooc-ans/js/teach_Study_Course_New.js?v=2023-0727-1404"></script>
+<script>
+//改变zmodel模块下标值
+tach=1,study=0;
+//studyToDeal();
+//屏蔽信息查询
+//studyMsgDeal();
+quitDeal();	 
+//fileDeal();
+</script>
+</body>

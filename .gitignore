@@ -1,0 +1,32 @@
+# Build
+client/build-qmake/
+client/build-android/
+client/build-android-qmake/android-build/build/
+client/build-desktop/
+*.obj
+*.o
+moc_*.cpp
+Makefile
+*.so
+
+# Python
+__pycache__/
+*.pyc
+server/__pycache__/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keys / secrets
+*.keystore
+*.pem
+*_id_ed25519*
+
+# Temp
+/tmp/
+*.apk
