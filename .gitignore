@@ -42,3 +42,5 @@ Thumbs.db
 # Temp
 /tmp/
 *.apk
+*.idsig
+*.tar.gz
