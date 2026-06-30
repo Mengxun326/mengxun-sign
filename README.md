@@ -1,154 +1,165 @@
-# 梦寻签到
+<p align="center">
+  <img src="screen.png" alt="梦寻签到" width="120" />
+</p>
 
-学习通（超星）批量签到 Android App + 云服务器。自动检测活跃签到任务，一键批量签到，支持二维码扫描、GPS 定位、拍照签到，以及朋友帮签（分享链接）。
+<h1 align="center">梦寻签到</h1>
+
+<p align="center">
+  学习通（超星）批量签到助手 · Android + 云服务器
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-Android-green.svg" alt="Platform" />
+  <img src="https://img.shields.io/badge/language-C%2B%2B%2FPython-blue.svg" alt="Language" />
+  <img src="https://img.shields.io/badge/framework-Qt%206.11%20%2F%20FastAPI-orange.svg" alt="Framework" />
+  <img src="https://img.shields.io/badge/license-MIT-lightgrey.svg" alt="License" />
+</p>
+
+---
+
+## 功能
+
+<table>
+  <tr>
+    <td width="50%">
+      <h3>📋 自动检测</h3>
+      <p>每 30 秒轮询学习通 API，检测到新签到任务时推送系统通知</p>
+    </td>
+    <td width="50%">
+      <h3>🚀 一键签到</h3>
+      <p>支持全部签到类型：普通 / 二维码 / 位置 / 拍照 / 手势</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>👥 批量签到</h3>
+      <p>从云服务器拉取所有已存账号，逐个登录签到，一次完成</p>
+    </td>
+    <td>
+      <h3>📷 二维码扫描</h3>
+      <p>实时摄像头预览 + 扫描框叠加，自动拍照 → 服务端 OpenCV 解码</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>🤝 朋友帮签</h3>
+      <p>生成分享链接，朋友在浏览器中扫码 / 定位 / 拍照后自动完成签到。前台服务后台保活，实时登录获取新鲜 Cookie</p>
+    </td>
+    <td>
+      <h3>🔐 安全存储</h3>
+      <p>客户端 AES 加密 + 设备 UUID 隔离，每台设备只能访问自己的账号</p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h3>🔄 自动更新</h3>
+      <p>启动检查新版本 → 内嵌进度条流式下载（避免 27MB OOM）→ 自动调起系统安装器</p>
+    </td>
+    <td>
+      <h3>📍 GPS 定位</h3>
+      <p>自动请求位置权限，10 秒超时回退，支持位置签到</p>
+    </td>
+  </tr>
+</table>
 
 ## 架构
 
 ```
-手机 (Qt Android C++)                    云服务器 (FastAPI + SQLite)
-┌──────────────────────┐              ┌──────────────────────┐
-│ SignInTab            │──HTTP──────→│ /api/accounts/*      │
-│   ChaoxingClient     │              │   (AES加密存储)       │
-│   (直连学习通API)     │              │ /api/sign/decode-qr  │
-│ AccountTab           │              │   (OpenCV QR解码)    │
-│   ApiClient ─────────┘              │ /api/share/*         │
-│                                      │   (朋友帮签)         │
-│ ShareHelper (Java)   │              │ /api/update/*        │
-│   (后台帮签服务)      │              │   (版本更新)         │
-└──────────────────────┘              └──────────────────────┘
+┌── 手机端 (Qt 6 Android C++) ──────────────────────┐
+│                                                     │
+│  ChaoxingClient ──HTTPS 直连──→ 学习通 API          │
+│  ApiClient ────HTTPS──→ 云服务器                    │
+│  ShareHelper (Java) 前台服务后台帮签                 │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+                         │
+                         ▼
+┌── 云服务器 (FastAPI + SQLite) ──────────────────────┐
+│                                                     │
+│  /api/accounts/*   加密账号存储 (按 device_id 隔离)  │
+│  /api/sign/*       QR 解码 · 签到日志               │
+│  /api/share/*      帮签创建 · 轮询 · 上报            │
+│  /api/update/*     版本检查 · APK 下载               │
+│                                                     │
+└─────────────────────────────────────────────────────┘
 ```
 
-**关键设计**：学习通 API 调用走手机直连（服务器 IP 被学习通 CDN 封锁），服务器仅做加密存储、二维码解码和帮签协调。
+> **关键设计**：学习通 API 从手机直连（服务器 IP 被 CDN 封锁），服务器仅做加密存储、QR 解码、帮签协调。
 
-## 功能
+## 快速开始
 
-### 签到
-- 自动检测：每 30 秒轮询，检测到新任务弹系统通知
-- 一键签到：普通/位置/二维码/拍照/手势全类型
-- 批量签到：从服务器拉取所有已存账号，逐个登录签到
-- 二维码：`QGraphicsVideoItem` 实时预览 + 扫描框叠加层，每 600ms 自动拍照 → 服务端 OpenCV 解码
-- GPS：自动请求位置权限，10 秒超时回退
-- 拍照签到：相机模式拍照上传
+### 环境
 
-### 账号管理
-- 客户端 AES 加密后存储到服务器
-- 设备 UUID 隔离：每台设备只能看到自己的账号
-- 登录/退出/切换账号（自定义卡片弹窗）
+- Qt 6.11+ · Android NDK 27+ · JDK 17+
+- Python 3.10+ · FastAPI · OpenCV
 
-### 朋友帮签
-- 生成分享链接（按签到类型自动适配页面：二维码扫描/GPS/拍照/普通）
-- 二维码页面：浏览器摄像头实时取景 → 云端 OpenCV 解码（`BarcodeDetector` + Cloud 双模）
-- 后台帮签：`ShareHelper` 前台服务 + 实时学习通登录 + 新鲜 cookie 签到
-- 分享链接 5 分钟自动过期
-
-### 自动更新
-- 启动检查更新 → 自定义卡片弹窗 → 内嵌进度条流式下载 → 权限检测 → 调起系统安装器
-- 27MB APK 流式写入磁盘，避免 OOM
-
-## 构建
-
-### 环境要求
-
-- Qt 6.11.1
-- Android SDK + NDK 27
-- JDK 17
-- OpenSSL .so 文件（`libssl_3.so`, `libcrypto_3.so`）
-
-### 客户端 (Qt Android)
+### 客户端
 
 ```bash
-export ANDROID_NDK_ROOT=/path/to/ndk/27.0.12077973
-export QT_DIR=/path/to/Qt/6.11.1
+git clone https://github.com/Mengxun326/mengxun-sign.git
+cd mengxun-sign/client
 
-mkdir -p client/build-qmake && cd client/build-qmake
-$QT_DIR/mingw_64/bin/qmake6 \
-  -qtconf $QT_DIR/android_arm64_v8a/bin/target_qt.conf \
-  ../XXTSign.pro
-$ANDROID_NDK_ROOT/prebuilt/linux-x86_64/bin/make -j4
+# 编译
+mkdir build-qmake && cd build-qmake
+qmake -qtconf /path/to/qt/android_arm64_v8a/bin/target_qt.conf ../XXTSign.pro
+make -j$(nproc)
 
-# 打包 APK
+# 打包 & 安装
 cp libXXTSign_arm64-v8a.so ../build-android-qmake/android-build/libs/arm64-v8a/
-./gradlew -p ../build-android-qmake/android-build assembleRelease
-
-# 签名
-apksigner sign --ks your.keystore --out mengxun-sign.apk <unsigned.apk>
-
-# 安装
-adb install -r mengxun-sign.apk
-adb shell am start -n com.mengxun.sign/org.qtproject.qt.android.bindings.QtActivity
+cd ../build-android-qmake/android-build && ./gradlew assembleRelease
+adb install -r build/outputs/apk/release/android-build-release-unsigned.apk
 ```
 
-### 服务端 (Python FastAPI)
+### 服务端
 
 ```bash
-# 上传 & 重启
-scp server/*.py user@your-server:/opt/xx-sign/
-ssh user@your-server \
-  "cd /opt/xx-sign && nohup python -m uvicorn main:app --host 0.0.0.0 --port 8001 &"
+cd server
+pip install -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port 8001
 ```
 
 ## 项目结构
 
 ```
-├── client/                          # Qt Android App
-│   ├── XXTSign.pro                  # qmake 项目文件
-│   ├── main.cpp                     # 入口 + JNI 注册
-│   ├── mainwindow.h/cpp             # 主窗口（导航、更新、省电）
+├── client/                         # Qt Android App
+│   ├── XXTSign.pro                 # qmake 项目文件
+│   ├── main.cpp                    # 入口 + JNI 注册
+│   ├── mainwindow.h/cpp            # 主窗口 · 导航 · 更新
 │   ├── network/
-│   │   ├── apiclient.h/cpp          # → 云服务器 HTTP
-│   │   └── chaoxingclient.h/cpp     # → 学习通直连 HTTPS
+│   │   ├── apiclient.h/cpp         # → 云服务器
+│   │   └── chaoxingclient.h/cpp    # → 学习通直连
 │   ├── crypto/
-│   │   └── cryptohelper.h/cpp       # AES 加解密 + inf_enc 签名
+│   │   └── cryptohelper.h/cpp      # AES 加解密
 │   ├── ui/
-│   │   ├── signintab.h/cpp          # 签到页（检测/签到/扫码/帮签）
-│   │   └── accounttab.h/cpp         # 账号管理页
+│   │   ├── signintab.h/cpp         # 签到 · 扫码 · 帮签
+│   │   └── accounttab.h/cpp        # 账号管理
 │   └── android/
 │       ├── AndroidManifest.xml
-│       ├── res/
-│       └── src/com/mengxun/sign/
-│           ├── ShareHelper.java     # 后台帮签前台服务
-│           └── ShareReceiver.java   # 帮签广播接收器
-│
-└── server/                          # FastAPI 云服务器
-    ├── main.py                      # 所有 API 端点
-    ├── models.py                    # SQLAlchemy 模型
-    ├── database.py                  # 数据库初始化 + 迁移
-    ├── config.py                    # 配置常量
-    └── update.json                  # 版本更新元数据
+│       └── src/.../                # Java 后台服务
+└── server/                         # FastAPI 云服务器
+    ├── main.py                     # API 端点
+    ├── models.py                   # 数据模型
+    ├── database.py                 # 初始化 + 迁移
+    ├── config.py                   # 配置
+    └── update.json                 # 版本元数据
 ```
 
-## API 端点
+## API
 
-### 账号
-| 方法 | 路径 | 说明 |
+| 方法 | 端点 | 说明 |
 |------|------|------|
-| POST | `/api/accounts/add` | 存储加密账号（按 device_id 隔离） |
-| GET | `/api/accounts/list` | 列出本设备所有账号 |
-| DELETE | `/api/accounts/{id}` | 删除账号 |
+| `POST` | `/api/accounts/add` | 加密存储账号 |
+| `GET` | `/api/accounts/list` | 按设备列出账号 |
+| `DELETE` | `/api/accounts/{id}` | 删除账号 |
+| `POST` | `/api/sign/decode-qr` | 二维码解码 |
+| `POST` | `/api/sign/log` | 签到日志 |
+| `POST` | `/api/share/create` | 创建帮签链接 |
+| `GET` | `/api/share/page/{token}` | 帮签页面 |
+| `POST` | `/api/share/submit/{token}` | 提交帮签数据 |
+| `GET` | `/api/share/pending/{token}` | 轮询待处理 |
+| `GET` | `/api/update/check` | 版本检查 |
+| `GET` | `/api/update/download` | APK 下载 |
 
-### 签到
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| POST | `/api/sign/decode-qr` | OpenCV 解码二维码图片 |
-| POST | `/api/sign/log` | 记录签到结果 |
+## License
 
-### 帮签
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| POST | `/api/share/create` | App 创建帮签链接 |
-| GET | `/api/share/page/{token}` | 浏览器帮签页面（按签到类型） |
-| POST | `/api/share/submit/{token}` | 朋友提交数据（图片/GPS） |
-| GET | `/api/share/pending/{token}` | App/ShareHelper 轮询待处理 |
-| GET | `/api/share/sign-params/{token}` | 获取签到参数 + 凭据 |
-| POST | `/api/share/result` | 上报签到结果 |
-| GET | `/api/share/status/{token}` | 浏览器轮询状态 |
-
-### 更新
-| 方法 | 路径 | 说明 |
-|------|------|------|
-| GET | `/api/update/check` | 返回最新版本信息 |
-| GET | `/api/update/download` | 下载 APK |
-
-## 许可
-
-仅供学习交流使用。
+MIT · 仅供学习交流使用
