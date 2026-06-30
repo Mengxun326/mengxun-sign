@@ -49,48 +49,41 @@
 
 ### 环境要求
 
-- Qt 6.11.1（`E:/Qt/6.11.1/`）
-- Android SDK（`%LOCALAPPDATA%/Android/Sdk`）
-- Android NDK 27
+- Qt 6.11.1
+- Android SDK + NDK 27
 - JDK 17
-- OpenSSL .so 文件
+- OpenSSL .so 文件（`libssl_3.so`, `libcrypto_3.so`）
 
 ### 客户端 (Qt Android)
 
 ```bash
-export ANDROID_NDK_ROOT="$HOME/AppData/Local/Android/Sdk/ndk/27.0.12077973"
+export ANDROID_NDK_ROOT=/path/to/ndk/27.0.12077973
+export QT_DIR=/path/to/Qt/6.11.1
 
-# 编译 .so
 mkdir -p client/build-qmake && cd client/build-qmake
-"E:/Qt/6.11.1/mingw_64/bin/qmake6" \
-  -qtconf "E:/Qt/6.11.1/android_arm64_v8a/bin/target_qt.conf" \
+$QT_DIR/mingw_64/bin/qmake6 \
+  -qtconf $QT_DIR/android_arm64_v8a/bin/target_qt.conf \
   ../XXTSign.pro
-"$ANDROID_NDK_ROOT/prebuilt/windows-x86_64/bin/make" -j4
+$ANDROID_NDK_ROOT/prebuilt/linux-x86_64/bin/make -j4
 
 # 打包 APK
 cp libXXTSign_arm64-v8a.so ../build-android-qmake/android-build/libs/arm64-v8a/
-cp ../android/AndroidManifest.xml ../build-android-qmake/android-build/AndroidManifest.xml
 ./gradlew -p ../build-android-qmake/android-build assembleRelease
 
 # 签名
-apksigner sign --ks debug.keystore --ks-pass pass:android \
-  --key-pass pass:android --ks-key-alias debug \
-  --out mengxun-sign.apk <unsigned.apk>
+apksigner sign --ks your.keystore --out mengxun-sign.apk <unsigned.apk>
 
 # 安装
 adb install -r mengxun-sign.apk
 adb shell am start -n com.mengxun.sign/org.qtproject.qt.android.bindings.QtActivity
-
-# 授权相机（首次安装后）
-adb shell pm grant com.mengxun.sign android.permission.CAMERA
 ```
 
 ### 服务端 (Python FastAPI)
 
 ```bash
 # 上传 & 重启
-scp -i <key> -P 32208 server/*.py root@47.121.180.250:/opt/xx-sign/
-ssh -i <key> -p 32208 root@47.121.180.250 \
+scp server/*.py user@your-server:/opt/xx-sign/
+ssh user@your-server \
   "cd /opt/xx-sign && nohup python -m uvicorn main:app --host 0.0.0.0 --port 8001 &"
 ```
 

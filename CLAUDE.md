@@ -20,52 +20,41 @@ Phone (Qt Android)                    Cloud Server (FastAPI)
 └──────────────────────┘
 ```
 
-**Critical design decision**: Chaoxing API calls go directly from the phone (via `ChaoxingClient`), NOT through the server. The cloud server IP (47.121.180.250) is blocked by Chaoxing's CDN. The server only handles account storage and QR image decoding.
+**Critical design decision**: Chaoxing API calls go directly from the phone (via `ChaoxingClient`), NOT through the server. Cloud server IPs are blocked by Chaoxing's CDN. The server only handles account storage and QR image decoding.
 
 ## Build & Deploy
 
 ### Client (Qt Android)
 
-Prerequisites: Qt 6.11.1 at `E:/Qt/6.11.1/`, Android SDK at `%LOCALAPPDATA%/Android/Sdk`, NDK 27, OpenSSL .so files in `client/android/libs/arm64-v8a/`.
+Prerequisites: Qt 6.11.1, Android SDK + NDK 27, JDK 17, OpenSSL .so files in `client/android/libs/arm64-v8a/`.
 
 ```bash
-# Build
-export ANDROID_NDK_ROOT="$HOME/AppData/Local/Android/Sdk/ndk/27.0.12077973"
+export ANDROID_NDK_ROOT=/path/to/ndk/27.0.12077973
+export QT_DIR=/path/to/Qt/6.11.1
+
 mkdir -p client/build-qmake && cd client/build-qmake
-"E:/Qt/6.11.1/mingw_64/bin/qmake6" \
-  -qtconf "E:/Qt/6.11.1/android_arm64_v8a/bin/target_qt.conf" \
+$QT_DIR/mingw_64/bin/qmake6 \
+  -qtconf $QT_DIR/android_arm64_v8a/bin/target_qt.conf \
   ../XXTSign.pro
-"$ANDROID_NDK_ROOT/prebuilt/windows-x86_64/bin/make" -j4
+$ANDROID_NDK_ROOT/prebuilt/linux-x86_64/bin/make -j4
 
 # APK
 cp libXXTSign_arm64-v8a.so ../build-android-qmake/android-build/libs/arm64-v8a/
-cmd //c "E:\Code\XXT\client\build-android-qmake\android-build\gradlew.bat -p E:\Code\XXT\client\build-android-qmake\android-build assembleRelease --no-daemon"
+./gradlew -p ../build-android-qmake/android-build assembleRelease
 
 # Sign & install
-JAVA_HOME="C:/Program Files/Microsoft/jdk-17.0.7.7-hotspot"
-"$JAVA_HOME/bin/java" -jar "$SDK/build-tools/36.0.0/lib/apksigner.jar" sign \
-  --ks debug.keystore --ks-pass pass:android --key-pass pass:android \
-  --ks-key-alias debug --out /tmp/app.apk <unsigned.apk>
+apksigner sign --ks your.keystore --out /tmp/app.apk <unsigned.apk>
 adb install -r /tmp/app.apk
 adb shell am start -n com.mengxun.sign/org.qtproject.qt.android.bindings.QtActivity
-```
-
-**Important**: After first install or when camera stops working, grant camera permission:
-```bash
 adb shell pm grant com.mengxun.sign android.permission.CAMERA
 ```
 
 ### Server (Python FastAPI)
 
-Deployed on Alibaba Cloud Linux 3 at `47.121.180.250:8001`. Python via Miniconda at `/opt/miniconda/bin/python`.
-
 ```bash
-# Upload & restart
-scp -i <key> -P 32208 server/main.py root@47.121.180.250:/opt/xx-sign/
-ssh -i <key> -p 32208 root@47.121.180.250 "kill \$(lsof -ti:8001) 2>/dev/null; sleep 1; cd /opt/xx-sign && nohup /opt/miniconda/bin/python -m uvicorn main:app --host 0.0.0.0 --port 8001 &"
+pip install -r server/requirements.txt
+cd server && uvicorn main:app --host 0.0.0.0 --port 8001
 ```
-
-SSH key: `C:\Users\Meng_\Downloads\47.121.180.250_id_ed25519`, port 32208.
 
 ## Key Files
 

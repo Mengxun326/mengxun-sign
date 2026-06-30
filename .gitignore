@@ -1,13 +1,25 @@
 # Build
 client/build-qmake/
 client/build-android/
+client/build-android-qmake/android-build/.gradle/
 client/build-android-qmake/android-build/build/
+client/build-android-qmake/android-build/libs/
+client/build-android-qmake/android-build/local.properties
+client/build-android-qmake/.qmake.stash
+client/build-android-qmake/moc_predefs.h
 client/build-desktop/
+client/build-minimal/
 *.obj
 *.o
 moc_*.cpp
 Makefile
 *.so
+*.jar
+*-deployment-settings.json
+*.idsig
+local.properties
+.qmake.stash
+moc_predefs.h
 
 # Python
 __pycache__/
